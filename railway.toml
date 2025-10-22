@@ -1,0 +1,49 @@
+# Railway Configuration for Hyperswitch
+[build]
+builder = "dockerfile"
+dockerfilePath = "dockerfile.railway"
+
+[deploy]
+healthcheckPath = "/health"
+healthcheckTimeout = 100
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 10
+
+[[services]]
+name = "hyperswitch"
+
+[services.variables]
+DATABASE_URL = "${{Postgres.DATABASE_URL}}"
+REDIS_URL = "${{Redis.REDIS_URL}}"
+BIND_ADDRESS = "0.0.0.0:8080"
+RUST_LOG = "info"
+MASTER_KEY = "${{RAILWAY_PUBLIC_DOMAIN}}-master-key-change-me"
+CONTROL_CENTER_SECRET = "${{RAILWAY_PUBLIC_DOMAIN}}-control-secret-change-me"
+ENABLE_ADMIN = "true"
+ADMIN_USERNAME = "admin"
+ADMIN_PASSWORD = "admin123"
+
+[[services.ports]]
+port = 8080
+handlers = ["http"]
+
+[[services.ports]]
+port = 443
+handlers = ["tls", "http"]
+
+[env]
+PORT = "8080"
+
+[[services.checks]]
+gracePeriod = "10s"
+interval = "30s"
+timeout = "10s"
+method = "GET"
+path = "/health"
+
+# Railway automatically adds PostgreSQL and Redis
+[[addons]]
+name = "Postgres"
+
+[[addons]]
+name = "Redis"

@@ -1,0 +1,39 @@
+# Hyperswitch Configuration File
+# Place this in config/ directory for custom settings
+
+[server]
+bind_address = "0.0.0.0:8080"
+master_key = "master_key_placeholder_change_in_production"
+
+[database]
+url = "postgresql://hyperswitch_user:hyperswitch_password@postgres:5432/hyperswitch"
+max_connections = 10
+
+[redis]
+url = "redis://redis:6379"
+pool_size = 10
+
+[log]
+level = "info"
+format = "json"
+
+[timeout]
+router_request = 60
+connector_request = 30
+
+[rate_limiting]
+# Per minute limits
+default = 100
+.Strict = 50
+
+[connectors]
+# Enable/disable specific connectors
+stripe = true
+razorpay = true
+paypal = true
+adyen = true
+
+[cors]
+allowed_origins = ["http://localhost:3000", "http://localhost:8090"]
+allowed_methods = ["GET", "POST", "PUT", "DELETE", "PATCH"]
+allowed_headers = ["*"]
