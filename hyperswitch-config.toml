@@ -6,7 +6,7 @@ bind_address = "0.0.0.0:8080"
 master_key = "master_key_placeholder_change_in_production"
 
 [database]
-url = "postgresql://hyperswitch_user:hyperswitch_password@postgres:5432/hyperswitch"
+url = "postgresql://${{DB_USER}}:${{DB_PASSWORD}}@postgres:5432/hyperswitch"
 max_connections = 10
 
 [redis]

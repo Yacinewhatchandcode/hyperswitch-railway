@@ -21,7 +21,7 @@ MASTER_KEY = "${{RAILWAY_PUBLIC_DOMAIN}}-master-key-change-me"
 CONTROL_CENTER_SECRET = "${{RAILWAY_PUBLIC_DOMAIN}}-control-secret-change-me"
 ENABLE_ADMIN = "true"
 ADMIN_USERNAME = "admin"
-ADMIN_PASSWORD = "admin123"
+ADMIN_PASSWORD = "${{ADMIN_PASSWORD}}"
 
 [[services.ports]]
 port = 8080
